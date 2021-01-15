@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceProvider", "ServiceProvider\ServiceProvider.csproj", "{15CB780A-D6F5-48B8-983E-CD61FD9290CF}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ServiceProviderShared", "ServiceProviderShared\ServiceProviderShared.shproj", "{E647928B-D774-4118-944A-629ECC584562}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		ServiceProviderShared\ServiceProviderShared.projitems*{15cb780a-d6f5-48b8-983e-cd61fd9290cf}*SharedItemsImports = 4
+		ServiceProviderShared\ServiceProviderShared.projitems*{e647928b-d774-4118-944a-629ecc584562}*SharedItemsImports = 13
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{15CB780A-D6F5-48B8-983E-CD61FD9290CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15CB780A-D6F5-48B8-983E-CD61FD9290CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15CB780A-D6F5-48B8-983E-CD61FD9290CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15CB780A-D6F5-48B8-983E-CD61FD9290CF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F6885DE5-8072-4DC3-B19C-AF312BF28F3E}
+	EndGlobalSection
+EndGlobal

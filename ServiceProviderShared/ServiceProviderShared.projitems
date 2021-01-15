@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>e647928b-d774-4118-944a-629ecc584562</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>ServiceProviderShared</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Configuration\ApplicationSettings.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Configuration\ConfigurationSectionConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Configuration\ConnectionStringSettings.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ServiceCollection.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ServiceFactory.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Service.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Web\MvcServiceApplication.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Web\ServiceProviderController.cs" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0"?>
+
+<package>
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <license type="expression">MIT</license>
+    <projectUrl>https://jsystemstech.azurewebsites.net/DbFacade.Net</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>Preview-$version$</releaseNotes>
+    <copyright>Copyright 2021</copyright>
+    <tags>Service Provider, service, service provider, serviceprovider,ServiceProvider,serviceProvider</tags>
+    <dependencies>
+      <group targetFramework=".NETFramework4.8" />
+    </dependencies>
+  </metadata>
+</package>
