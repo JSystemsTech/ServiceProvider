@@ -11,7 +11,7 @@
     <projectUrl>https://github.com/JSystemsTech/ServiceProvidert</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Preview-$version$</releaseNotes>
+    <releaseNotes>$version$</releaseNotes>
     <copyright>Copyright 2021</copyright>
     <tags>Service Provider, service, service provider, serviceprovider,ServiceProvider,serviceProvider</tags>
     <dependencies>
