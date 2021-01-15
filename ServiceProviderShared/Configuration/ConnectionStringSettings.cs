@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 
-namespace FederatedIPAuthenticationService.Configuration
+namespace ServiceProvider.Configuration
 {
     public interface IConnectionStringConfig : IConfigurationSectionConfig
     {
