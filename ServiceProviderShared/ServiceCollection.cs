@@ -2,6 +2,7 @@
 using ServiceProvider.Services;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 
 namespace ServiceProvider.ServiceProvider
@@ -23,6 +24,7 @@ namespace ServiceProvider.ServiceProvider
     public interface IServices
     {
         T Get<T>();
+        ConnectionStringSettings GetConnectionString(string key);
     }
     
     
@@ -84,5 +86,6 @@ namespace ServiceProvider.ServiceProvider
         });
         
         public T Get<T>() => Services.ContainsKey(typeof(T)) ? (T)Services[typeof(T)] : default;
+        public ConnectionStringSettings GetConnectionString(string key) => Get<IConnectionStringConfig>() is IConnectionStringConfig config? config.GetConnectionString(key): default;
     }
 }
