@@ -89,6 +89,9 @@
     <None Include="packages.config" />
     <None Include="ServiceProvider.nuspec" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="icon.jpg" />
+  </ItemGroup>
   <Import Project="..\ServiceProviderShared\ServiceProviderShared.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

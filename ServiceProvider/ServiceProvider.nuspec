@@ -9,6 +9,7 @@
     <owners>$author$</owners>
     <license type="expression">MIT</license>
     <projectUrl>https://github.com/JSystemsTech/ServiceProvider</projectUrl>
+    <icon>icon.jpg</icon>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>Release $version$ This version corrects issues with namespaces</releaseNotes>
@@ -18,4 +19,7 @@
       <group targetFramework=".NETFramework4.8" />
     </dependencies>
   </metadata>
+  <files>
+    <file src="icon.jpg" target="" />
+  </files>
 </package>
