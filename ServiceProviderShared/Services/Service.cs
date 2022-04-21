@@ -1,6 +1,4 @@
-﻿using ServiceProvider.ServiceProvider;
-
-namespace ServiceProvider.Services
+﻿namespace ServiceProvider.Services
 {
     public interface IService
     {

@@ -5,21 +5,14 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 
-namespace ServiceProvider.ServiceProvider
+namespace ServiceProvider
 {
     public interface IServiceCollection
     {
-        void AddSingleton<TIService, TService>(TService instance)
-                where TService : class, TIService;
-        void AddSingleton<TService>(TService instance) where TService : class;
-        void AddSingleton<TService>(Func<IServices, TService> builder) where TService : class;
-
-        void AddService<TIService, TService>()
-            where TService : IService, TIService;
-        void AddService<TService>() where TService : IService;
-        void AddConfiguration<TIService, TService>()
-            where TService : IConfiguration, TIService;
-        void AddConfiguration<TService>() where TService : IConfiguration;
+        void Add<TService>()
+            where TService : class;
+        void Add<TIService, TService>()
+            where TService : class, TIService;
     }
     public interface IServices
     {
@@ -31,61 +24,58 @@ namespace ServiceProvider.ServiceProvider
     public interface ISpecialConfiguration: IConfiguration { }
     internal class ServiceCollection : IServiceCollection, IServices
     {
-        private Dictionary<Type, object> Services { get; set; }
-        public ServiceCollection(Action<IServiceCollection> configureServices)
-        {
-            Services = new Dictionary<Type, object>();
-            configureServices(this);
-            InitSpecialConfigurations();
-            InitConfigurations();
-            InitServices();
-        }
-        public void AddSingleton<TService>(Func<IServices, TService> builder) where TService : class => AddSingleton(builder(this));
-        public void AddSingleton<TIService, TService>(TService instance)
+        private Dictionary<(Type type, Type alias), object> Services { get; set; }
+
+        public void Add<TService>()
+            where TService : class
+        => Add<TService, TService>();
+        public void Add<TIService, TService>()
             where TService : class, TIService
-        {
-            if (!Services.ContainsKey(typeof(TIService)))
+        {            
+            if (!Services.Keys.Any(k => k.type == typeof(TService) || k.alias == typeof(TIService)))
             {
-                Services.Add(typeof(TIService), instance);
+                Services.Add((typeof(TService), typeof(TIService)), null);
             }
         }
-        public void AddSingleton<TService>(TService instance) where TService : class => AddSingleton<TService, TService>(instance);
-
-        public void AddService<TIService, TService>()
-            where TService : IService, TIService
+        public T Get<T>()
         {
-            if (!Services.ContainsKey(typeof(TIService)))
+            if (Services.Keys.Any(k=>k.type == typeof(T) || k.alias == typeof(T)))
             {
-                Services.Add(typeof(TIService), (TService)Activator.CreateInstance(typeof(TService)));
+                var key = Services.Keys.FirstOrDefault(k => k.type == typeof(T) || k.alias == typeof(T));
+                Services.TryGetValue(key, out object service);
+                if (service == null)
+                {
+                    T newServiceInstance = (T)Activator.CreateInstance(key.type);
+                    if (newServiceInstance is ISpecialConfiguration iSpecialConfiguration)
+                    {
+                        iSpecialConfiguration.InitConfiguation(this);
+                    }
+                    else if (newServiceInstance is IService iService)
+                    {
+                        iService.InitService(this);
+                    }
+                    else if (newServiceInstance is IConfiguration iConfiguration)
+                    {
+                        iConfiguration.InitConfiguation(this);
+                    }
+                    Services[key] = newServiceInstance;
+                    return newServiceInstance;
+                }
+                else if(service is T serviceInstance)
+                {
+                    return serviceInstance;
+                }
             }
+            return default(T);
         }
-        public void AddService<TService>() where TService : IService => AddService<TService, TService>();
 
-        public void AddConfiguration<TIService, TService>()
-            where TService : IConfiguration, TIService
+        public ServiceCollection()
         {
-            if (!Services.ContainsKey(typeof(TIService)))
-            {
-                Services.Add(typeof(TIService), (TService)Activator.CreateInstance(typeof(TService)));
-            }
-        }      
+            Services = new Dictionary<(Type type, Type alias), object>();
+        }
 
-        public void AddConfiguration<TService>() where TService : IConfiguration => AddConfiguration<TService, TService>();
 
-        private void InitSpecialConfigurations() => Services.Where(i => i.Value is ISpecialConfiguration).ToList().ForEach(i => {
-            IConfiguration config = (IConfiguration)i.Value;
-            config.InitConfiguation(this);
-        });
-        private void InitConfigurations() => Services.Where(i => i.Value is IConfiguration && !(i.Value is ISpecialConfiguration)).ToList().ForEach(i => {
-            IConfiguration config = (IConfiguration)i.Value;
-            config.InitConfiguation(this);
-        });
-        private void InitServices() => Services.Where(i => i.Value is IService).ToList().ForEach(i => {
-            IService config = (IService)i.Value;
-            config.InitService(this);
-        });
-        
-        public T Get<T>() => Services.ContainsKey(typeof(T)) ? (T)Services[typeof(T)] : default;
-        public ConnectionStringSettings GetConnectionString(string key) => Get<IConnectionStringConfig>() is IConnectionStringConfig config? config.GetConnectionString(key): default;
+        public ConnectionStringSettings GetConnectionString(string key) 
+            => Get<IConnectionStringConfig>() is IConnectionStringConfig config ? config.GetConnectionString(key): default;
     }
 }

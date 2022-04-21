@@ -1,4 +1,4 @@
-﻿using ServiceProvider.ServiceProvider;
+﻿using ServiceProvider.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -13,13 +13,9 @@ namespace ServiceProvider.Configuration
     public class ApplicationSettings: ConfigurationSectionConfig,IApplicationSettings, ISpecialConfiguration
     {
         public string GetSetting(string key)
-        {
-            throw new NotImplementedException();
-        }
+        => Collection.GetSetting<string>(key);
 
-        protected override IDictionary<string, string> GetConfigurationSource()
-        {
-            return ConfigurationManager.AppSettings.AllKeys.ToDictionary(key => key, key => ConfigurationManager.AppSettings[key]);
-        }
+        protected override IDictionary<string, object> GetConfigurationSource()
+        => ConfigurationManager.AppSettings.ToDataDictionary();
     }
 }

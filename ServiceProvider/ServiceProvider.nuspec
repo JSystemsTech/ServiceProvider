@@ -9,10 +9,10 @@
     <owners>$author$</owners>
     <license type="expression">MIT</license>
     <projectUrl>https://github.com/JSystemsTech/ServiceProvider</projectUrl>
-    <icon>icon.jpg</icon>
+    <icon>images\icon.jpg</icon>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Release $version$ This version corrects issues with namespaces</releaseNotes>
+    <releaseNotes>Release $version$: refactor Service configuration and initialization</releaseNotes>
     <copyright>Copyright 2021</copyright>
     <tags>Service Provider, service, service provider, serviceprovider,ServiceProvider,serviceProvider</tags>
     <dependencies>
@@ -20,6 +20,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="icon.jpg" target="" />
+    <file src="..\icon.jpg" target="images\"/>
   </files>
 </package>

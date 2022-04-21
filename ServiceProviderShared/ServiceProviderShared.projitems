@@ -6,17 +6,17 @@
     <SharedGUID>e647928b-d774-4118-944a-629ecc584562</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>ServiceProviderShared</Import_RootNamespace>
+    <Import_RootNamespace>ServiceProvider</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\ApplicationSettings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\ConfigurationSectionConfig.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\ConnectionStringSettings.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Configuration\DataDictionaryExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ServiceCollection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ServiceFactory.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ServiceManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ServiceConfig.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Service.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Web\MvcServiceApplication.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Web\ServiceProviderController.cs" />
   </ItemGroup>
 </Project>

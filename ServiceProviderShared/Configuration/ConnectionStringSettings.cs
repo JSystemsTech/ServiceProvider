@@ -1,6 +1,4 @@
-﻿using ServiceProvider.Configuration;
-using ServiceProvider.ServiceProvider;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 
@@ -21,13 +19,13 @@ namespace ServiceProvider.Configuration
         => new ConnectionStringSettings(name, connectionString, providerName);
         protected static ConnectionStringSettings CreateConnectionStringSettings(string name, string connectionString)
         => new ConnectionStringSettings(name, connectionString);
-        protected override IDictionary<string, string> GetConfigurationSource()
+        protected override IDictionary<string, object> GetConfigurationSource()
         {
             foreach(ConnectionStringSettings settings in ConfigurationManager.ConnectionStrings)
             {
                 ConnectionStrings.Add(settings.Name, settings);
             }
-            return new Dictionary<string, string> ();
+            return new Dictionary<string, object> ();
         }
 
         public ConnectionStringSettings GetConnectionString(string key) => ConnectionStrings.ContainsKey(key) ? ConnectionStrings[key] : null;
